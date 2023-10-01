@@ -1,14 +1,10 @@
 <script setup lang="ts">
   import { onMounted, Ref, ref } from 'vue'
+  import { Note } from '@/modules'
 
   const props = withDefaults(
     defineProps<{
-      notes: Array<{
-        id: PropertyKey
-        title: string
-        text: string
-        tasks: Array<{ done: boolean; name: string }>
-      }>
+      notes: Note[]
     }>(),
     {
       notes: () => []
@@ -16,12 +12,12 @@
   )
 
   const emit = defineEmits<{
-    (e: 'select-note', note): void
+    (e: 'select-note', note: Note): void
   }>()
 
   const activeElement: Ref<undefined | PropertyKey> = ref(undefined)
 
-  function isShowHr(id, index) {
+  function isShowHr(id: PropertyKey, index: number) {
     return (
       activeElement.value !== id &&
       props.notes?.[index + 1] &&
@@ -35,14 +31,17 @@
 
   function selectNote(id: PropertyKey) {
     activeElement.value = id
-    emit(
-      'select-note',
-      props.notes.find((note) => note.id === id)
-    )
+    const note = props.notes.find((note) => note.id === id)
+
+    if (note) {
+      emit('select-note', note)
+    }
   }
 
   onMounted(() => {
-    selectNote(props.notes[0].id)
+    if (props.notes.length) {
+      selectNote(props.notes[0].id)
+    }
   })
 </script>
 
@@ -60,7 +59,7 @@
       </span>
 
       <span class="app-sidebar__element-text app-side-bar_clamp">{{
-        getSubTitle(note.text)
+        getSubTitle(note.additionalText)
       }}</span>
 
       <hr v-if="isShowHr(note.id, index)" />

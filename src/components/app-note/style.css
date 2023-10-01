@@ -8,10 +8,12 @@
     align-items: center;
 }
 
-.app-note__input {
-    font-size: 1.5em;
+.app-note__title, .app-note__input {
+    font-size: 1.3em;
     font-weight: bold;
+}
 
+.app-note__input {
     border: none;
     border-bottom: 1px solid black;
 }
@@ -19,5 +21,4 @@
 .app-note__textarea {
     font-size: 16px;
     width: 100%;
-    /*min-height: 200px;*/
 }

@@ -1,46 +1,25 @@
 <script setup lang="ts">
-  import { computed, nextTick, reactive, Ref, ref } from 'vue'
-  import { IProps } from './module'
+  import { computed, reactive } from 'vue'
+  import { Note } from '@/modules'
   import AppSvgIcon from '@/components/app-svg-icon/app-svg-icon.vue'
-  const props = withDefaults(defineProps<IProps>(), {
+  import AppTextarea from '@/components/app-input/app-textarea.vue'
+
+  const props = withDefaults(defineProps<Note>(), {
+    id: '',
     title: '',
-    text: '',
+    additionalText: '',
     tasks: () => []
   })
 
   const emit = defineEmits<{
     (e: 'update:title', value: string): void
-    (e: 'update:text', value: string): void
+    (e: 'update:additionalText', value: string): void
   }>()
-
-  enum Fields {
-    title,
-    text
-  }
-
-  const textarea: Ref<HTMLDivElement | null> = ref(null)
 
   const editing = reactive({
     title: false,
-    text: false
+    additionalText: false
   })
-
-  function toggleEditing(value: Fields) {
-    editing[Fields[value]] = !editing[Fields[value]]
-
-    nextTick(() => {
-      if (value === Fields.text) {
-        adjustTextareaHeight()
-      }
-    })
-  }
-
-  function adjustTextareaHeight() {
-    if (textarea.value) {
-      textarea.value.style.height = 'auto'
-      textarea.value.style.height = textarea.value.scrollHeight + 'px'
-    }
-  }
 
   const titleValue = computed({
     get: () => props.title,
@@ -50,9 +29,9 @@
   })
 
   const textValue = computed({
-    get: () => props.text,
+    get: () => props.additionalText,
     set(value) {
-      emit('update:text', value)
+      emit('update:additionalText', value)
     }
   })
 </script>
@@ -60,30 +39,33 @@
 <template>
   <div class="app-note">
     <div class="app-note__title">
-      <h2 v-if="!editing.title">{{ titleValue }}</h2>
+      <pre v-if="!editing.title" class="app-note__title">{{ titleValue }}</pre>
 
-      <div v-if="editing.title">
-        <input v-model="titleValue" class="app-note__input" type="text" />
-      </div>
+      <app-textarea
+        v-if="editing.title"
+        v-model="titleValue"
+        class="app-note__input"
+      />
 
-      <a href="" @click.prevent="toggleEditing(Fields.title)">
+      <a href="" @click.prevent="editing.title = !editing.title">
         <app-svg-icon :name="!editing.title ? 'edit' : 'check'" />
       </a>
     </div>
 
     <div class="app-note__text">
-      <a href="" @click.prevent="toggleEditing(Fields.text)">
-        <app-svg-icon :name="!editing.text ? 'edit' : 'check'" />
+      <a
+        href=""
+        @click.prevent="editing.additionalText = !editing.additionalText"
+      >
+        <app-svg-icon :name="!editing.additionalText ? 'edit' : 'check'" />
       </a>
 
-      <pre v-if="!editing.text">{{ textValue }}</pre>
+      <pre v-if="!editing.additionalText">{{ textValue }}</pre>
 
-      <textarea
-        v-if="editing.text"
-        ref="textarea"
+      <app-textarea
+        v-if="editing.additionalText"
         v-model="textValue"
         class="app-note__textarea"
-        @input="adjustTextareaHeight"
       />
     </div>
   </div>

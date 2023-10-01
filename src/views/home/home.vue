@@ -1,13 +1,14 @@
 <script setup lang="ts">
   import AppNote from '@/components/app-note'
-  import { ref } from 'vue'
+  import { ref, Ref } from 'vue'
   import notesStub from './notes'
-  import AppSidebar from '@/components/app-sidebar/app-sidebar.vue'
+  import AppSidebar from '@/components/app-sidebar'
+  import { Note } from '@/modules'
 
-  const notes = ref(notesStub)
-  const currentNote = ref(undefined)
+  const notes: Ref<Note[]> = ref(notesStub)
+  const currentNote: Ref<Note | undefined> = ref(undefined)
 
-  function selectNote(note) {
+  function selectNote(note: Note) {
     currentNote.value = note
   }
 </script>
@@ -19,7 +20,7 @@
       v-if="currentNote"
       :key="currentNote.id"
       v-model:title="currentNote.title"
-      v-model:text="currentNote.text"
+      v-model:additional-text="currentNote.additionalText"
       :tasks="currentNote.tasks"
       style="width: 100%"
     />
