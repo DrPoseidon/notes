@@ -9,7 +9,7 @@
   })
 
   const emit = defineEmits<{
-    (e: 'update:title', value: string): void,
+    (e: 'update:title', value: string): void
     (e: 'update:text', value: string): void
   }>()
 
@@ -37,8 +37,8 @@
 
   function adjustTextareaHeight() {
     if (textarea.value) {
-      textarea.value.style.height = 'auto';
-      textarea.value.style.height = textarea.value.scrollHeight + 'px';
+      textarea.value.style.height = 'auto'
+      textarea.value.style.height = textarea.value.scrollHeight + 'px'
     }
   }
 
@@ -59,30 +59,30 @@
 
 <template>
   <div class="app-note">
-    <div class='app-note__title'>
-      <h2 v-if='!editing.title'>{{ titleValue }}</h2>
+    <div class="app-note__title">
+      <h2 v-if="!editing.title">{{ titleValue }}</h2>
 
-      <div v-if='editing.title'>
-        <input class='app-note__input' type='text' v-model='titleValue'/>
+      <div v-if="editing.title">
+        <input v-model="titleValue" class="app-note__input" type="text" />
       </div>
 
-      <a href='' @click.prevent='toggleEditing(Fields.title)'>
-        <app-svg-icon :name="!editing.title ? 'edit' : 'check'"/>
+      <a href="" @click.prevent="toggleEditing(Fields.title)">
+        <app-svg-icon :name="!editing.title ? 'edit' : 'check'" />
       </a>
     </div>
 
-    <div class='app-note__text'>
-      <a href='' @click.prevent='toggleEditing(Fields.text)'>
-        <app-svg-icon :name="!editing.text ? 'edit' : 'check'"/>
+    <div class="app-note__text">
+      <a href="" @click.prevent="toggleEditing(Fields.text)">
+        <app-svg-icon :name="!editing.text ? 'edit' : 'check'" />
       </a>
 
-      <pre v-if='!editing.text'>{{ textValue }}</pre>
+      <pre v-if="!editing.text">{{ textValue }}</pre>
 
       <textarea
-        class='app-note__textarea'
-        ref='textarea'
-        v-if='editing.text'
-        v-model='textValue'
+        v-if="editing.text"
+        ref="textarea"
+        v-model="textValue"
+        class="app-note__textarea"
         @input="adjustTextareaHeight"
       />
     </div>

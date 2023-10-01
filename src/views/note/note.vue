@@ -1,7 +1,5 @@
-<template>
-  note
-</template>
+<template>note</template>
 
 <style>
-@import './style.css';
+  @import './style.css';
 </style>
