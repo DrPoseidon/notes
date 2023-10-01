@@ -1,0 +1,51 @@
+.app-sidebar {
+    height: 100vh;
+    overflow-y: auto;
+    padding-right: 10px;
+    border-right: 1px solid #e6e6e6;
+}
+
+.app-side-bar_clamp {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+
+.app-sidebar__element {
+    position: relative;
+    padding: 10px 20px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    height: 55px;
+    cursor: pointer;
+}
+
+hr {
+    height: 1px;
+    width: calc(100% - 25px);
+    border: none;
+    background-color: #e6e6e6;
+    position: absolute;
+    bottom: 0;
+    left: 20px;
+}
+
+.app-sidebar__element-text {
+    font-size: 12px;
+    opacity: 0.5;
+}
+
+.app-sidebar__element-title {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.app-sidebar__element_active {
+    background-color: #fee490;
+    border: none;
+    cursor: default;
+}

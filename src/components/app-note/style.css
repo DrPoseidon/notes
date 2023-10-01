@@ -1,0 +1,23 @@
+.app-note {
+    padding: 20px;
+}
+
+.app-note__title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.app-note__input {
+    font-size: 1.5em;
+    font-weight: bold;
+
+    border: none;
+    border-bottom: 1px solid black;
+}
+
+.app-note__textarea {
+    font-size: 16px;
+    width: 100%;
+    /*min-height: 200px;*/
+}
