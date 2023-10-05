@@ -1,0 +1,22 @@
+.app-header {
+    width: 100%;
+    height: 40px;
+    padding: 10px;
+    background-color: #F2F2F1;
+    z-index: 1;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.app-header__icon {
+    color: #676867;
+    transition: .3s;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.app-header__icon:hover {
+    background-color: #E6E6E5;
+}

@@ -5,4 +5,11 @@ type Note = {
   tasks: Array<{ name: string; done: boolean }>
 }
 
-export { Note }
+interface INote {
+  id: PropertyKey
+  title: string
+  additionalText: string
+  tasks: Array<{ name: string; done: boolean }>
+}
+
+export { Note, INote }

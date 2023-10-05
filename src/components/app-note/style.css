@@ -2,10 +2,28 @@
     padding: 20px;
 }
 
-.app-note__title {
+.app-note__title, .app-note__text {
     display: flex;
     flex-direction: row;
-    align-items: center;
+    gap: 20px;
+}
+
+.app-note__title {
+    margin-bottom: 10px;
+}
+
+.app-note__switch {
+    position: sticky;
+    height: max-content;
+    top: 5px;
+    margin-top: 5px;
+    color: black;
+    filter: opacity(0.5);
+    transition: filter .2s;
+}
+
+.app-note__switch:hover {
+    filter: opacity(1);
 }
 
 .app-note__title, .app-note__input {

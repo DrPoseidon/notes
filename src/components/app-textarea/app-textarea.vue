@@ -4,9 +4,11 @@
   const props = withDefaults(
     defineProps<{
       modelValue: string
+      placeholder?: string
     }>(),
     {
-      modelValue: ''
+      modelValue: '',
+      placeholder: ''
     }
   )
 
@@ -41,6 +43,7 @@
     v-model="textareaValue"
     rows="1"
     class="app-textarea"
+    :placeholder="placeholder"
     @input="adjustHeight"
   />
 </template>

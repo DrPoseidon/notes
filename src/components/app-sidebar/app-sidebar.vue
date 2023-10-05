@@ -1,10 +1,10 @@
 <script setup lang="ts">
   import { onMounted, Ref, ref } from 'vue'
-  import { Note } from '@/modules'
+  import { INote } from '@/modules'
 
   const props = withDefaults(
     defineProps<{
-      notes: Note[]
+      notes: INote[]
     }>(),
     {
       notes: () => []
@@ -12,7 +12,7 @@
   )
 
   const emit = defineEmits<{
-    (e: 'select-note', note: Note): void
+    (e: 'select-note', note: INote): void
   }>()
 
   const activeElement: Ref<undefined | PropertyKey> = ref(undefined)
@@ -27,6 +27,10 @@
 
   function getSubTitle(text: string) {
     return text || 'Нет дополнительного текста'
+  }
+
+  function getTitle(title: string) {
+    return title || 'Новая заметка'
   }
 
   function selectNote(id: PropertyKey) {
@@ -55,7 +59,7 @@
       @click="selectNote(note.id)"
     >
       <span class="app-sidebar__element-title app-side-bar_clamp">
-        {{ note.title }}
+        {{ getTitle(note.title) }}
       </span>
 
       <span class="app-sidebar__element-text app-side-bar_clamp">{{

@@ -1,21 +1,26 @@
 <script setup lang="ts">
   import AppNote from '@/components/app-note'
   import { ref, Ref } from 'vue'
-  import notesStub from './notes'
   import AppSidebar from '@/components/app-sidebar'
-  import { Note } from '@/modules'
+  import { INote } from '@/modules'
 
-  const notes: Ref<Note[]> = ref(notesStub)
-  const currentNote: Ref<Note | undefined> = ref(undefined)
+  import { useNoteStore } from '@/stores/useNoteStore'
+  const { notes } = useNoteStore()
 
-  function selectNote(note: Note) {
+  const currentNote: Ref<INote | undefined> = ref(undefined)
+
+  function selectNote(note: INote) {
     currentNote.value = note
   }
 </script>
 
 <template>
   <div class="home">
-    <app-sidebar :notes="notes" style="width: 20%" @select-note="selectNote" />
+    <app-sidebar
+      :notes="Object.values(notes)"
+      style="width: 20%"
+      @select-note="selectNote"
+    />
     <app-note
       v-if="currentNote"
       :key="currentNote.id"
