@@ -1,0 +1,24 @@
+.app-tasks {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.app-tasks__add {
+    position: sticky;
+    height: max-content;
+    top: 5px;
+    color: black;
+    filter: opacity(0.5);
+    transition: filter .2s;
+}
+
+.app-tasks__add:hover {
+    filter: opacity(1);
+}
+
+.app-tasks__checkboxes {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}

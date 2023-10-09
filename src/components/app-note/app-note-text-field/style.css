@@ -1,18 +1,18 @@
-.app-note {
-    padding: 20px;
-}
-
-.app-note__title, .app-note__text {
+.app-note-text-field {
     display: flex;
     flex-direction: row;
     gap: 20px;
 }
 
-.app-note__title {
+pre {
+    white-space: pre-line;
+}
+
+.app-note-text-field_title {
     margin-bottom: 10px;
 }
 
-.app-note__switch {
+.app-note-text-field__switch {
     position: sticky;
     height: max-content;
     top: 5px;
@@ -22,21 +22,21 @@
     transition: filter .2s;
 }
 
-.app-note__switch:hover {
+.app-note-text-field__switch:hover {
     filter: opacity(1);
 }
 
-.app-note__title, .app-note__input {
+.app-note-text-field_title, .app-note-text-field__input {
     font-size: 1.3em;
     font-weight: bold;
 }
 
-.app-note__input {
+.app-note-text-field__input {
     border: none;
     border-bottom: 1px solid black;
 }
 
-.app-note__textarea {
+.app-note-text-field__textarea {
     font-size: 16px;
     width: 100%;
 }

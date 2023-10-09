@@ -2,13 +2,17 @@
   import AppSvgIcon from '@/components/app-svg-icon'
   import { useNoteStore } from '@/stores/useNoteStore'
 
-  const { createNote } = useNoteStore()
+  const noteStore = useNoteStore()
 </script>
 
 <template>
   <div class="app-header">
-    <a href="" @click.prevent="createNote">
+    <a @click.prevent="noteStore.createNote()">
       <app-svg-icon name="create" class="app-header__icon" />
+    </a>
+
+    <a @click.prevent="noteStore.deleteNote()">
+      <app-svg-icon name="trash" class="app-header__icon" />
     </a>
   </div>
 </template>

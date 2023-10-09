@@ -1,10 +1,32 @@
 <script setup lang="ts">
   import AppHeader from '@/components/app-header'
+  import AppSidebar from '@/components/app-sidebar'
+
+  import { useNoteStore } from '@/stores/useNoteStore'
+  import { computed } from 'vue'
+  import AppNoteTask from '@/components/app-note/app-note-task/app-note-task.vue'
+  const noteStore = useNoteStore()
+
+  const style = computed(() => ({
+    display: 'flex',
+    'flex-direction': 'row',
+    height: 'calc(100vh - 60px)'
+  }))
 </script>
 
 <template>
-  <app-header />
-  <router-view />
+  <app-note-task />
+
+  <app-header ref="header" />
+
+  <div :style="style">
+    <app-sidebar
+      :notes="Object.values(noteStore.notes)"
+      @select-note="noteStore.selectNote"
+    />
+
+    <router-view />
+  </div>
 </template>
 
 <style>

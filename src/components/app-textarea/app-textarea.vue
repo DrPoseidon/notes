@@ -5,10 +5,12 @@
     defineProps<{
       modelValue: string
       placeholder?: string
+      maxLength?: number | undefined
     }>(),
     {
       modelValue: '',
-      placeholder: ''
+      placeholder: '',
+      maxLength: undefined
     }
   )
 
@@ -16,6 +18,7 @@
 
   const emit = defineEmits<{
     (e: 'update:modelValue', value: string): void
+    (e: 'blur'): void
   }>()
 
   const textareaValue = computed({
@@ -23,6 +26,22 @@
     set(value) {
       emit('update:modelValue', value)
     }
+  })
+
+  const textareaAttrs = computed(() => {
+    const attrs: {
+      placeholder: string
+      rows: number | string
+      maxLength?: number
+    } = { placeholder: props.placeholder, rows: 1 }
+
+    console.log(props.maxLength)
+
+    if (typeof props.maxLength === 'number') {
+      attrs.maxLength = props.maxLength
+    }
+
+    return attrs
   })
 
   function adjustHeight() {
@@ -43,8 +62,9 @@
     v-model="textareaValue"
     rows="1"
     class="app-textarea"
-    :placeholder="placeholder"
+    v-bind="textareaAttrs"
     @input="adjustHeight"
+    @blur="emit('blur')"
   />
 </template>
 

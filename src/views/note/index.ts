@@ -1,2 +1,2 @@
-import Note from './note.vue';
-export default Note;
+import Note from './note.vue'
+export default Note

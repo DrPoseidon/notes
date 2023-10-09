@@ -1,0 +1,31 @@
+.app-checkbox {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.app-checkbox_checked, .app-checkbox_unchecked {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.app-checkbox_unchecked {
+    border: 1px solid #C6C6C6;
+}
+
+.app-checkbox_checked {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #FDBB02;
+    background-color: #FDBB02;
+    color: white;
+}
+
+input[type="checkbox"] {
+    display: none;
+}

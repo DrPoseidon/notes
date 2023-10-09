@@ -1,6 +1,9 @@
 <script setup lang="ts">
-  import { onMounted, Ref, ref } from 'vue'
+  import { computed, onMounted } from 'vue'
   import { INote } from '@/modules'
+  import { useNoteStore } from '@/stores/useNoteStore'
+
+  const noteStore = useNoteStore()
 
   const props = withDefaults(
     defineProps<{
@@ -12,16 +15,16 @@
   )
 
   const emit = defineEmits<{
-    (e: 'select-note', note: INote): void
+    (e: 'select-note', note: PropertyKey): void
   }>()
 
-  const activeElement: Ref<undefined | PropertyKey> = ref(undefined)
+  const currentId = computed(() => noteStore.selectedNote?.id)
 
   function isShowHr(id: PropertyKey, index: number) {
     return (
-      activeElement.value !== id &&
+      currentId.value !== id &&
       props.notes?.[index + 1] &&
-      props.notes[index + 1].id !== activeElement.value
+      props.notes[index + 1].id !== currentId.value
     )
   }
 
@@ -34,12 +37,7 @@
   }
 
   function selectNote(id: PropertyKey) {
-    activeElement.value = id
-    const note = props.notes.find((note) => note.id === id)
-
-    if (note) {
-      emit('select-note', note)
-    }
+    emit('select-note', id)
   }
 
   onMounted(() => {
@@ -50,12 +48,12 @@
 </script>
 
 <template>
-  <div class="app-sidebar">
+  <div v-if="notes.length" class="app-sidebar">
     <div
       v-for="(note, index) in notes"
       :key="note.id"
       class="app-sidebar__element"
-      :class="{ 'app-sidebar__element_active': activeElement === note.id }"
+      :class="{ 'app-sidebar__element_active': currentId === note.id }"
       @click="selectNote(note.id)"
     >
       <span class="app-sidebar__element-title app-side-bar_clamp">
@@ -68,6 +66,10 @@
 
       <hr v-if="isShowHr(note.id, index)" />
     </div>
+  </div>
+
+  <div v-if="!notes.length" class="app-sidebar">
+    <div class="app-sidebar__empty-state">Создайте заметку</div>
   </div>
 </template>
 

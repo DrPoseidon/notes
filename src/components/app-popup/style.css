@@ -1,0 +1,39 @@
+.app-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(1, 1, 1, 0.6);
+    z-index: 1;
+}
+
+.app-popup__window {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    width: 30%;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.app-popup__window-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.app-popup__window-body {
+    padding-top: 20px;
+}
+
+.app-popup__close {
+    filter: opacity(0.5);
+    transition: filter .2s;
+}
+
+.app-popup__close:hover {
+    filter: opacity(1);
+}
