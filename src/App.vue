@@ -3,11 +3,11 @@
   import AppSidebar from '@/components/app-sidebar'
 
   import { useNoteStore } from '@/stores/useNoteStore'
-  import { computed } from 'vue'
+  import { computed, CSSProperties, Ref } from 'vue'
   import AppNoteTask from '@/components/app-note/app-note-task/app-note-task.vue'
   const noteStore = useNoteStore()
 
-  const style = computed(() => ({
+  const style: Ref<CSSProperties> = computed(() => ({
     display: 'flex',
     'flex-direction': 'row',
     height: 'calc(100vh - 60px)'

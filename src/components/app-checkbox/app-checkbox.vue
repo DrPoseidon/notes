@@ -20,8 +20,8 @@
 
 <template>
   <div>
-    <input :id="value.id" v-model="checkboxValue" type="checkbox" />
-    <label :for="value.id" class="app-checkbox">
+    <input :id="String(value.id)" v-model="checkboxValue" type="checkbox" />
+    <label :for="String(value.id)" class="app-checkbox">
       <span v-if="value.checked" class="app-checkbox_checked">
         <app-svg-icon name="check" :size="12" />
       </span>
