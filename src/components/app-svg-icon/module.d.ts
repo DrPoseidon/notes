@@ -1,8 +1,10 @@
+import { ComponentPublicInstance } from 'vue'
+
 interface IProps {
   /**
    * Имя файла
    */
-  name: string
+  icon: { [key: PropertyKey]: unknown }
   /**
    * Ширина
    */
@@ -15,6 +17,10 @@ interface IProps {
    * Ширина и высота одного размера
    */
   size?: number | string
+}
+
+type TIcon = {
+  render: () => { props: { height: number; width: number } }
 }
 
 export { IProps }

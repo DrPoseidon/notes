@@ -1,6 +1,8 @@
 <script setup lang="ts">
   import AppSvgIcon from '@/components/app-svg-icon'
   import AppTextarea from '@/components/app-textarea'
+  import EditIcon from '@/assets/icons/edit.svg'
+  import CheckIcon from '@/assets/icons/check.svg'
   import { computed, onMounted, ref } from 'vue'
 
   const props = withDefaults(
@@ -63,7 +65,7 @@
       class="app-note-text-field__switch"
       @click.prevent="toggleEditing"
     >
-      <app-svg-icon :name="!isEditing ? 'edit' : 'check'" />
+      <app-svg-icon :icon="!isEditing ? EditIcon : CheckIcon" />
     </a>
 
     <pre

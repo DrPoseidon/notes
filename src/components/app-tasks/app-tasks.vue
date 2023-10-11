@@ -1,6 +1,7 @@
 <script setup lang="ts">
   import AppCheckbox from '@/components/app-checkbox'
   import AppSvgIcon from '@/components/app-svg-icon'
+  import PlusSquareIcon from '@/assets/icons/plus-square.svg'
 
   withDefaults(
     defineProps<{
@@ -28,7 +29,7 @@
 <template>
   <div class="app-tasks">
     <a href="" class="app-tasks__add" @click.prevent="addTask">
-      <app-svg-icon name="plus-square" />
+      <app-svg-icon :icon="PlusSquareIcon" />
     </a>
 
     <div class="app-tasks__checkboxes">

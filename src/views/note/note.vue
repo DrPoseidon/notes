@@ -1,11 +1,11 @@
 <script setup lang="ts">
   import AppSvgIcon from '@/components/app-svg-icon'
-
+  import MehIcon from '@/assets/icons/meh.svg'
   import { computed, nextTick, ref, Ref, watch } from 'vue'
   import { useNoteStore } from '@/stores/useNoteStore'
   import { INote } from '@/modules'
   import AppNoteTextField from '@/components/app-note/app-note-text-field'
-  import AppTasks from '@/components/app-tasks/app-tasks.vue'
+  import AppTasks from '@/components/app-tasks'
 
   const noteStore = useNoteStore()
   const currentNote: Ref<INote | undefined> = ref(undefined)
@@ -71,7 +71,7 @@
     </div>
 
     <div v-if="!currentNote" class="note__empty-text">
-      <app-svg-icon name="meh" style="margin-right: 10px" />
+      <app-svg-icon :icon="MehIcon" style="margin-right: 10px" />
 
       <span> Нет выбранной заметки </span>
     </div>
