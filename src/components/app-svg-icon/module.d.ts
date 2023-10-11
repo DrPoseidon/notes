@@ -1,10 +1,10 @@
-import { ComponentPublicInstance } from 'vue'
+import { Component } from 'vue'
 
 interface IProps {
   /**
    * Имя файла
    */
-  icon: { [key: PropertyKey]: unknown }
+  icon: InstanceType<typeof Component>
   /**
    * Ширина
    */
