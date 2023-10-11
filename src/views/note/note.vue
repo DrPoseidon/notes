@@ -1,11 +1,10 @@
 <script setup lang="ts">
   import AppSvgIcon from '@/components/app-svg-icon'
 
-  import { computed, nextTick, reactive, ref, Ref, watch } from 'vue'
+  import { computed, nextTick, ref, Ref, watch } from 'vue'
   import { useNoteStore } from '@/stores/useNoteStore'
   import { INote } from '@/modules'
-  import AppNoteTextField from '@/components/app-note/app-note-text-field/app-note-text-field.vue'
-  import AppCheckbox from '@/components/app-checkbox/app-checkbox.vue'
+  import AppNoteTextField from '@/components/app-note/app-note-text-field'
   import AppTasks from '@/components/app-tasks/app-tasks.vue'
 
   const noteStore = useNoteStore()

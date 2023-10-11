@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import AppCheckbox from '@/components/app-checkbox/app-checkbox.vue'
+  import AppCheckbox from '@/components/app-checkbox'
   import AppSvgIcon from '@/components/app-svg-icon'
 
   withDefaults(

@@ -35,8 +35,6 @@
       maxLength?: number
     } = { placeholder: props.placeholder, rows: 1 }
 
-    console.log(props.maxLength)
-
     if (typeof props.maxLength === 'number') {
       attrs.maxLength = props.maxLength
     }

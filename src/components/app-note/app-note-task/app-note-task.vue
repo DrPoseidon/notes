@@ -3,7 +3,7 @@
   import AppPopup from '@/components/app-popup'
   import { computed, ref } from 'vue'
   import { useNoteStore } from '@/stores/useNoteStore'
-  import AppSvgIcon from '@/components/app-svg-icon/app-svg-icon.vue'
+  import AppSvgIcon from '@/components/app-svg-icon'
   const noteStore = useNoteStore()
 
   const isShowPopup = computed(() => noteStore.isShowAddPopup)
