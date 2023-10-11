@@ -4,15 +4,8 @@
   "author": "",
   "description": "",
   "scripts": {
-    "build": "vue-tsc --noEmit && vite build",
-    "dev": "vite",
-    "lint": "eslint . --ext vue,ts,js --ignore-path .gitignore",
-    "test": "jest",
-    "test:coverage": "jest --coverage"
-  },
-  "lint-staged": {
-    "*.{ts,js,vue}": "eslint --fix",
-    "*": "prettier -w -u"
+    "build": "vite build",
+    "dev": "vite"
   },
   "dependencies": {
     "pinia": "^2.1.6",

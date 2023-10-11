@@ -6,7 +6,7 @@ import { resolve } from 'node:path'
 import VueTypeImports from 'vite-plugin-vue-type-imports'
 
 export default defineConfig({
-  base: '/notes/',
+  base: '/',
   plugins: [vue(), svgLoader(), VueTypeImports()],
   server: {
     open: '/',

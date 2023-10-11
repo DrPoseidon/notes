@@ -3,13 +3,13 @@ import Note from '@/views/note'
 
 const routes: Array<RouteRecordRaw> = [
   {
-    path: '/note',
+    path: '/',
     name: 'note',
     component: Note
   },
   {
     path: '/:pathMatch(.*)*',
-    redirect: { name: 'note' }
+    redirect: '/'
   }
 ]
 
