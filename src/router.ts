@@ -3,18 +3,20 @@ import Note from '@/views/note'
 
 const routes: Array<RouteRecordRaw> = [
   {
-    path: '/notes',
+    path: '/',
     name: 'note',
     component: Note
   },
   {
     path: '/:pathMatch(.*)*',
-    redirect: '/notes'
+    redirect: { name: 'note' }
   }
 ]
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHistory(
+    process.env.NODE_ENV === 'production' ? '/notes/' : '/'
+  ),
   routes
 })
 
