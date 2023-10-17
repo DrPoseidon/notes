@@ -1,7 +1,7 @@
 <script setup lang="ts">
+  import { computed, ref } from 'vue'
   import AppTextarea from '@/components/app-textarea'
   import AppPopup from '@/components/app-popup'
-  import { computed, ref } from 'vue'
   import { useNoteStore } from '@/stores/useNoteStore'
   import AppSvgIcon from '@/components/app-svg-icon'
   import PlusIcon from '@/assets/icons/plus.svg'

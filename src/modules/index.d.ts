@@ -1,3 +1,5 @@
+import { FunctionalComponent, SVGAttributes } from 'vue/dist/vue'
+
 interface INote {
   id: PropertyKey
   title: string
@@ -5,4 +7,8 @@ interface INote {
   tasks: Array<{ id: PropertyKey; name: string; done: boolean }>
 }
 
-export { Note, INote }
+type TIcon = FunctionalComponent<SVGAttributes> & {
+  render?: () => { props: { width: number; height: number } }
+}
+
+export { INote, TIcon }

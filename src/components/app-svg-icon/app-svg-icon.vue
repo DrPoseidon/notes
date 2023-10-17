@@ -18,11 +18,14 @@
    */
   const svgHeight = computed(() => (props.size ? props.size : props.height))
 
-  type TViewBox = string | null
+  type TViewBox = string | undefined
 
   const viewBox: Ref<TViewBox> = computed(() => {
-    const { width, height } = props.icon.render().props
-    return `0 0 ${width} ${height}`
+    if (props.icon.render) {
+      const { width, height } = props.icon.render().props
+      return `0 0 ${width} ${height}`
+    }
+    return `0 0 ${svgWidth.value} ${svgHeight.value}`
   })
 </script>
 

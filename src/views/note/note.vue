@@ -1,11 +1,11 @@
 <script setup lang="ts">
+  import AppNoteTextField from '@/components/app-note/app-note-text-field'
+  import AppTasks from '@/components/app-tasks'
   import AppSvgIcon from '@/components/app-svg-icon'
   import MehIcon from '@/assets/icons/meh.svg'
   import { computed, nextTick, ref, Ref, watch } from 'vue'
   import { useNoteStore } from '@/stores/useNoteStore'
   import { INote } from '@/modules'
-  import AppNoteTextField from '@/components/app-note/app-note-text-field'
-  import AppTasks from '@/components/app-tasks'
 
   const noteStore = useNoteStore()
   const currentNote: Ref<INote | undefined> = ref(undefined)

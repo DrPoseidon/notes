@@ -1,10 +1,10 @@
-import { Component } from 'vue'
+import { TIcon } from '@/modules'
 
 interface IProps {
   /**
    * Имя файла
    */
-  icon: InstanceType<typeof Component>
+  icon: TIcon
   /**
    * Ширина
    */
@@ -17,10 +17,6 @@ interface IProps {
    * Ширина и высота одного размера
    */
   size?: number | string
-}
-
-type TIcon = {
-  render: () => { props: { height: number; width: number } }
 }
 
 export { IProps }
