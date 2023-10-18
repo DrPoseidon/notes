@@ -12,6 +12,18 @@ export default defineConfig(({ mode }) => {
   return {
     base: env.NODE_ENV === 'production' ? '/notes/' : '/',
     plugins: [vue(), svgLoader(), VueTypeImports()],
+    build: {
+      rollupOptions: {
+        output: {
+          chunkFileNames: (chunkInfo) => {
+            if (chunkInfo.facadeModuleId.includes('.svg')) {
+              return 'assets/icons/[name]-[hash].js'
+            }
+            return '[name]-[hash].js'
+          }
+        }
+      }
+    },
     server: {
       open: base,
       port: 8080
