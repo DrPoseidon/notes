@@ -1,10 +1,8 @@
-import { TIcon } from '@/modules'
-
 interface IProps {
   /**
    * Имя файла
    */
-  icon: TIcon
+  name: string
   /**
    * Ширина
    */

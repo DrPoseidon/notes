@@ -1,6 +1,5 @@
 <script setup lang="ts">
   import AppSvgIcon from '@/components/app-svg-icon'
-  import CloseIcon from '@/assets/icons/close.svg'
   import { watch } from 'vue'
 
   const props = withDefaults(
@@ -33,7 +32,7 @@
         <h4>{{ title }}</h4>
 
         <a class="app-popup__close" @click="emit('close-popup')">
-          <app-svg-icon :icon="CloseIcon" />
+          <app-svg-icon name="close" />
         </a>
       </div>
 

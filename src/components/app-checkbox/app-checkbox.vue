@@ -1,6 +1,5 @@
 <script setup lang="ts">
   import AppSvgIcon from '@/components/app-svg-icon'
-  import CheckIcon from '@/assets/icons/check.svg'
   import { computed } from 'vue'
 
   const props = defineProps<{
@@ -24,7 +23,7 @@
     <input :id="String(value.id)" v-model="checkboxValue" type="checkbox" />
     <label :for="String(value.id)" class="app-checkbox">
       <span v-if="value.checked" class="app-checkbox_checked">
-        <app-svg-icon :icon="CheckIcon" :size="12" />
+        <app-svg-icon name="check" :size="12" />
       </span>
 
       <span v-if="!value.checked" class="app-checkbox_unchecked" />

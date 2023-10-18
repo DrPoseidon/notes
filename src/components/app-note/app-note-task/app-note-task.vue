@@ -4,7 +4,6 @@
   import AppPopup from '@/components/app-popup'
   import { useNoteStore } from '@/stores/useNoteStore'
   import AppSvgIcon from '@/components/app-svg-icon'
-  import PlusIcon from '@/assets/icons/plus.svg'
   const noteStore = useNoteStore()
 
   const isShowPopup = computed(() => noteStore.isShowAddPopup)
@@ -36,7 +35,7 @@
         :class="{ 'app-note-task__button_disabled': !task }"
         @click="addTask"
       >
-        <app-svg-icon :icon="PlusIcon" />
+        <app-svg-icon name="plus" />
         <span> Добавить </span>
       </button>
     </template>

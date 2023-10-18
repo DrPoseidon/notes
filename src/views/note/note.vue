@@ -2,7 +2,6 @@
   import AppNoteTextField from '@/components/app-note/app-note-text-field'
   import AppTasks from '@/components/app-tasks'
   import AppSvgIcon from '@/components/app-svg-icon'
-  import MehIcon from '@/assets/icons/meh.svg'
   import { computed, nextTick, ref, Ref, watch } from 'vue'
   import { useNoteStore } from '@/stores/useNoteStore'
   import { INote } from '@/modules'
@@ -71,7 +70,7 @@
     </div>
 
     <div v-if="!currentNote" class="note__empty-text">
-      <app-svg-icon :icon="MehIcon" style="margin-right: 10px" />
+      <app-svg-icon name="meh" style="margin-right: 10px" />
 
       <span> Нет выбранной заметки </span>
     </div>

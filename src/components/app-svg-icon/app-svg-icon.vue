@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { computed, Ref } from 'vue'
+  import { computed, defineAsyncComponent, ref, shallowRef, watch } from 'vue'
   import { IProps } from './module'
 
   const props = withDefaults(defineProps<IProps>(), {
@@ -12,27 +12,38 @@
    * Выбор ширины
    */
   const svgWidth = computed(() => (props.size ? props.size : props.width))
+  const iconInstance = shallowRef('')
 
   /**
    * Выбор высоты
    */
   const svgHeight = computed(() => (props.size ? props.size : props.height))
 
-  type TViewBox = string | undefined
+  const viewBox = ref(`0 0 ${svgWidth.value} ${svgHeight.value}`)
 
-  const viewBox: Ref<TViewBox> = computed(() => {
-    if (props.icon.render) {
-      const { width, height } = props.icon.render().props
-      return `0 0 ${width} ${height}`
-    }
-    return `0 0 ${svgWidth.value} ${svgHeight.value}`
-  })
+  function loadIcon() {
+    iconInstance.value = defineAsyncComponent(() =>
+      import(`../../assets/icons/${props.name}.svg`).then((module) => {
+        const { width, height } = module.default.render().props
+        viewBox.value = `0 0 ${width} ${height}`
+        return module
+      })
+    )
+  }
+
+  watch(
+    () => props.name,
+    () => {
+      loadIcon()
+    },
+    { immediate: true }
+  )
 </script>
 
 <template>
   <component
-    :is="icon"
-    v-if="icon"
+    :is="iconInstance"
+    v-if="iconInstance"
     :width="svgWidth"
     :height="svgHeight"
     :viewBox="viewBox"
