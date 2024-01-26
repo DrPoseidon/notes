@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { computed, onMounted } from 'vue'
-  import { INote } from '@/modules'
+  import type { INote } from '@/types'
   import { useNoteStore } from '@/stores/useNoteStore'
 
   const noteStore = useNoteStore()

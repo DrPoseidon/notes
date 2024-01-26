@@ -4,6 +4,7 @@ import svgLoader from 'vite-svg-loader'
 
 import { resolve } from 'node:path'
 import VueTypeImports from 'vite-plugin-vue-type-imports'
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 
 export default defineConfig(({ mode }) => {
   const env = { ...process.env, ...loadEnv(mode, process.cwd(), '') }
@@ -11,7 +12,17 @@ export default defineConfig(({ mode }) => {
 
   return {
     base: env.NODE_ENV === 'production' ? '/notes/' : '/',
-    plugins: [vue(), svgLoader(), VueTypeImports()],
+    plugins: [
+      vue(),
+      svgLoader(),
+      VueTypeImports(),
+      createSvgIconsPlugin({
+        // Specify the icon folder to be cached
+        iconDirs: [resolve(process.cwd(), 'src/assets/icons')],
+        // Specify symbolId format
+        symbolId: 'icon-[dir]-[name]'
+      })
+    ],
     build: {
       rollupOptions: {
         output: {

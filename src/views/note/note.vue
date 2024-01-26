@@ -4,7 +4,7 @@
   import AppSvgIcon from '@/components/app-svg-icon'
   import { computed, nextTick, ref, Ref, watch } from 'vue'
   import { useNoteStore } from '@/stores/useNoteStore'
-  import { INote } from '@/modules'
+  import { INote } from '../../types'
 
   const noteStore = useNoteStore()
   const currentNote: Ref<INote | undefined> = ref(undefined)

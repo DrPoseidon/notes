@@ -27,6 +27,7 @@
     "prettier": "3.0.3",
     "typescript": "5.2.2",
     "vite": "4.4.11",
+    "vite-plugin-svg-icons": "^2.0.1",
     "vite-plugin-vue-type-imports": "0.2.5",
     "vue-tsc": "0.40.13"
   }

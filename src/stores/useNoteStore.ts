@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { INote } from '@/modules'
+import { INote } from '../types'
 import { computed, Ref, ref } from 'vue'
 import { v4 as uuidv4 } from 'uuid'
 
