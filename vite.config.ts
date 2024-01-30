@@ -1,48 +1,56 @@
-import { defineConfig, loadEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import { resolve } from 'path'
+import { defineConfig, loadEnv } from 'vite'
+import VueTypeImports from 'vite-plugin-vue-type-imports'
 import svgLoader from 'vite-svg-loader'
 
-import { resolve } from 'node:path'
-import VueTypeImports from 'vite-plugin-vue-type-imports'
-import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
-
-export default defineConfig(({ mode }) => {
+export default ({ mode }) => {
   const env = { ...process.env, ...loadEnv(mode, process.cwd(), '') }
-  const base = env.NODE_ENV === 'production' ? '/notes/' : '/'
 
-  return {
-    base: env.NODE_ENV === 'production' ? '/notes/' : '/',
-    plugins: [
-      vue(),
-      svgLoader(),
-      VueTypeImports(),
-      createSvgIconsPlugin({
-        // Specify the icon folder to be cached
-        iconDirs: [resolve(process.cwd(), 'src/assets/icons')],
-        // Specify symbolId format
-        symbolId: 'icon-[dir]-[name]'
-      })
-    ],
+  // production mode
+  const isProd = env.NODE_ENV === 'production'
+
+  return defineConfig({
+    // base: isProd ? '/notes/' : '/',
     build: {
+      assetsDir: '',
+      outDir: resolve(__dirname, 'dist'),
       rollupOptions: {
         output: {
-          chunkFileNames: (chunkInfo) => {
-            if (chunkInfo.facadeModuleId.includes('.svg')) {
-              return 'assets/icons/[name]-[hash].js'
+          manualChunks: (id) => {
+            // SVG
+            if (id.includes('.svg')) {
+              return 'icons/sprites'
             }
-            return '[name]-[hash].js'
+
+            return 'index'
+          },
+          assetFileNames: (assetInfo) => {
+            // IMAGES
+            if (assetInfo.name?.match(/\.(png|jpe?g|svg)(\?.*)?$/)) {
+              return 'img/[name]-[hash:8].[ext]'
+            }
+
+            // CSS
+            if (assetInfo.name?.includes('.css')) {
+              return 'css/[name]-[hash:8].[ext]'
+            }
+
+            return '[name].[ext]'
           }
         }
       }
     },
-    server: {
-      open: base,
-      port: 8080
-    },
     resolve: {
       alias: {
-        '@': resolve(__dirname, 'src')
+        '@': resolve(process.cwd(), 'src')
       }
-    }
-  }
-})
+    },
+    server: {
+      open: '/',
+      port: 8080
+    },
+    envDir: resolve(__dirname, 'config', 'env'),
+    plugins: [vue(), VueTypeImports(), svgLoader()].filter(Boolean)
+  })
+}

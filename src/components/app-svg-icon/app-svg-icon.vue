@@ -12,19 +12,42 @@
    * Выбор ширины
    */
   const svgWidth = computed(() => (props.size ? props.size : props.width))
+  const iconInstance = shallowRef('')
 
   /**
    * Выбор высоты
    */
   const svgHeight = computed(() => (props.size ? props.size : props.height))
 
-  // const viewBox = ref(`0 0 ${svgWidth.value} ${svgHeight.value}`)
+  const viewBox = ref(`0 0 ${svgWidth.value} ${svgHeight.value}`)
 
-  const symbolId = computed(() => `#icon-${props.name}`)
+  function loadIcon() {
+    iconInstance.value = defineAsyncComponent(() =>
+      import(`../../assets/icons/${props.name}.svg`).then((module) => {
+        if (module.default?.render) {
+          const { width, height } = module.default.render().props
+          viewBox.value = `0 0 ${width} ${height}`
+        }
+        return module
+      })
+    )
+  }
+
+  watch(
+    () => props.name,
+    () => {
+      loadIcon()
+    },
+    { immediate: true }
+  )
 </script>
 
 <template>
-  <svg aria-hidden="true" :width="svgWidth" :height="svgHeight">
-    <use :href="symbolId" fill="black" />
-  </svg>
+  <component
+    :is="iconInstance"
+    v-if="iconInstance"
+    :width="svgWidth"
+    :height="svgHeight"
+    :viewBox="viewBox"
+  />
 </template>
