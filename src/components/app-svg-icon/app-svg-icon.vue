@@ -1,53 +1,59 @@
 <script setup lang="ts">
-  import { computed, defineAsyncComponent, ref, shallowRef, watch } from 'vue'
-  import type { IProps } from './types'
+  import {
+    defineAsyncComponent,
+    type Component,
+    watch,
+    shallowReactive,
+    AsyncComponentLoader
+  } from 'vue'
 
-  const props = withDefaults(defineProps<IProps>(), {
-    width: 20,
-    height: 20,
-    size: 0
+  // TODO: нужно разобраться с типизацией по названиям иконок
+  const iconFiles: Record<string, AsyncComponentLoader> = import.meta.glob(
+    '../../assets/icons/*.svg'
+  )
+
+  const props = withDefaults(
+    defineProps<{
+      name: string
+      size?: number
+    }>(),
+    {
+      size: 24
+    }
+  )
+
+  const getIconComponent = (path: string) =>
+    defineAsyncComponent(() => iconFiles[path]())
+
+  const icons: Record<string, Component> = shallowReactive({})
+
+  // Преобразуем пути файлов в компоненты и добавим их в объект icons
+  Object.keys(iconFiles).forEach((filePath) => {
+    const iconName = filePath.split('/').pop()?.replace('.svg', '')
+    if (iconName) {
+      icons[iconName] = getIconComponent(filePath)
+    }
   })
-
-  /**
-   * Выбор ширины
-   */
-  const svgWidth = computed(() => (props.size ? props.size : props.width))
-  const iconInstance = shallowRef('')
-
-  /**
-   * Выбор высоты
-   */
-  const svgHeight = computed(() => (props.size ? props.size : props.height))
-
-  const viewBox = ref(`0 0 ${svgWidth.value} ${svgHeight.value}`)
-
-  function loadIcon() {
-    iconInstance.value = defineAsyncComponent(() =>
-      import(`../../assets/icons/${props.name}.svg`).then((module) => {
-        if (module.default?.render) {
-          const { width, height } = module.default.render().props
-          viewBox.value = `0 0 ${width} ${height}`
-        }
-        return module
-      })
-    )
-  }
 
   watch(
     () => props.name,
-    () => {
-      loadIcon()
+    (value) => {
+      if (!icons[value]) {
+        console.warn(`[WARN]: Нет иконки с именем ${props.name}`)
+      }
     },
-    { immediate: true }
+    {
+      immediate: true
+    }
   )
 </script>
 
 <template>
   <component
-    :is="iconInstance"
-    v-if="iconInstance"
-    :width="svgWidth"
-    :height="svgHeight"
-    :viewBox="viewBox"
+    :is="icons[name]"
+    v-if="icons[name]"
+    :width="size"
+    :height="size"
+    class="app-svg-icon"
   />
 </template>

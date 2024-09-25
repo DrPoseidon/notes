@@ -3,7 +3,8 @@
   "scripts": {
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview --port 8080",
-    "dev": "vite"
+    "dev": "vite",
+    "lint": "eslint ."
   },
   "dependencies": {
     "pinia": "2.1.7",

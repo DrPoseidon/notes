@@ -8,6 +8,7 @@ export default ({ mode }) => {
   const env = { ...process.env, ...loadEnv(mode, process.cwd(), '') }
 
   // production mode
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const isProd = env.NODE_ENV === 'production'
 
   return defineConfig({
@@ -51,6 +52,26 @@ export default ({ mode }) => {
       port: 8080
     },
     envDir: resolve(__dirname, 'config', 'env'),
-    plugins: [vue(), VueTypeImports(), svgLoader()].filter(Boolean)
+    plugins: [
+      vue(),
+      VueTypeImports(),
+      svgLoader({
+        svgoConfig: {
+          multipass: true,
+          plugins: [
+            {
+              name: 'preset-default',
+              params: {
+                overrides: {
+                  // viewBox is required to resize SVGs with CSS.
+                  // @see https://github.com/svg/svgo/issues/1128
+                  removeViewBox: false
+                }
+              }
+            }
+          ]
+        }
+      })
+    ]
   })
 }
