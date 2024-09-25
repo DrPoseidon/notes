@@ -12,7 +12,7 @@ export default ({ mode }) => {
   const isProd = env.NODE_ENV === 'production'
 
   return defineConfig({
-    // base: isProd ? '/notes/' : '/',
+    base: isProd ? '/notes/' : '/',
     build: {
       assetsDir: '',
       outDir: resolve(__dirname, 'dist'),
